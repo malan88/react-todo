@@ -10,7 +10,6 @@ class Item extends React.Component {
 
 class List extends React.Component {
     constructor(props) {
-        super(props);
         this.state = {
             list: []
         }
@@ -36,18 +35,14 @@ class List extends React.Component {
 
 class ToDo extends React.Component {
     constructor(props) {
-        super(props);
         this.state = {value: ''};
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({value: event.target.value});
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
     }
 
