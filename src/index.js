@@ -11,7 +11,7 @@ class Item extends React.Component {
 class List extends React.Component {
     constructor(props) {
         this.state = {
-            list: []
+            list: [] 
         }
     }
 
@@ -44,6 +44,7 @@ class ToDo extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        //use new passed down function
     }
 
     render() {
@@ -60,13 +61,12 @@ class ToDo extends React.Component {
 class ToDoList extends React.Component {
     //make global state here
 
-    //create a function to pass down to ToDo
-    
+    //create a function to pass down to ToDo that sets global state
     render() {
         return (
             <div className="todolist">
-                <ToDo />
-                <List />
+                <ToDo /> {/*pass down new function */}
+                <List /> {/* pass down global state */}
             </div>
         )
     }
