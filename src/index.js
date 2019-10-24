@@ -9,12 +9,6 @@ class Item extends React.Component {
 }
 
 class List extends React.Component {
-    constructor(props) {
-        this.state = {
-            list: []
-        }
-    }
-
     createItem(value) {
         return (<Item value={value} />)
     }
@@ -22,7 +16,7 @@ class List extends React.Component {
     render() {
         const list = [];
         for (let i = 0; i < this.state.list.length; i++)
-            list.push(this.createItem(this.state.list[i]));
+            list.push(this.createItem(this.props.list[i]));
 
         return (
             <div>
@@ -34,15 +28,14 @@ class List extends React.Component {
 
 
 class ToDo extends React.Component {
-    constructor(props) {
-        this.state = {value: ''};
-    }
+    state = {value: ''};
 
     handleChange = (event) => {
         this.setState({value: event.target.value});
     }
 
     handleSubmit = (event) => {
+        this.props.addItem(event.target.value)
         event.preventDefault();
     }
 
@@ -57,12 +50,21 @@ class ToDo extends React.Component {
     }
 }
 
+
 class ToDoList extends React.Component {
+    state = {items: []}
+
+    addItem(item) {
+        items = this.state.items.slice()
+        items.push(item)
+        this.setState({items: items})
+    }
+
     render() {
         return (
             <div className="todolist">
-                <ToDo />
-                <List />
+                <ToDo addItem={this.addItem} />
+                <List list={this.items} />
             </div>
         )
     }
