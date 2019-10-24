@@ -1,12 +1,81 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+class Item extends React.Component {
+    render() {
+        return (<li>{this.props.value}</li>)
+    }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+}
+
+class List extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            list: []
+        }
+    }
+
+    createItem(value) {
+        return (<Item value={value} />)
+    }
+
+    render() {
+        const list = [];
+        for (let i = 0; i < this.state.list.length; i++)
+            list.push(this.createItem(this.state.list[i]));
+
+        return (
+            <div>
+                <ol>{list}</ol>
+            </div>
+        );
+    }
+}
+
+
+class ToDo extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <form>
+                <label>Add task:</label>
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+                <input type="submit" value="Submit" />
+            </form>
+        )
+    }
+}
+
+class ToDoList extends React.Component {
+    render() {
+        return (
+            <div className="todolist">
+                <ToDo />
+                <List />
+            </div>
+        )
+    }
+}
+
+// ==================================
+
+ReactDOM.render(
+    <ToDoList />,
+    document.getElementById('root')
+);
