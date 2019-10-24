@@ -58,6 +58,10 @@ class ToDo extends React.Component {
 }
 
 class ToDoList extends React.Component {
+    //make global state here
+
+    //create a function to pass down to ToDo
+    
     render() {
         return (
             <div className="todolist">
