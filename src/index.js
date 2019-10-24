@@ -15,7 +15,7 @@ class List extends React.Component {
 
     render() {
         const list = [];
-        for (let i = 0; i < this.state.list.length; i++)
+        for (let i = 0; i < this.props.list.length; i++)
             list.push(this.createItem(this.props.list[i]));
 
         return (
@@ -35,8 +35,8 @@ class ToDo extends React.Component {
     }
 
     handleSubmit = (event) => {
-        this.props.addItem(event.target.value)
         event.preventDefault();
+        this.props.addItem(event.target.value)
     }
 
     render() {
@@ -55,7 +55,7 @@ class ToDoList extends React.Component {
     state = {items: []}
 
     addItem(item) {
-        items = this.state.items.slice()
+        let items = this.state.items.slice()
         items.push(item)
         this.setState({items: items})
     }
@@ -64,7 +64,7 @@ class ToDoList extends React.Component {
         return (
             <div className="todolist">
                 <ToDo addItem={this.addItem} />
-                <List list={this.items} />
+                <List list={this.state.items} />
             </div>
         )
     }
