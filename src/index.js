@@ -62,6 +62,9 @@ class ToDoList extends React.Component {
     //make global state here
 
     //create a function to pass down to ToDo that sets global state
+    addItem = (item) => {
+        this.setState(prevState => ({items: [...prevState.items, item]}))
+    }
     render() {
         return (
             <div className="todolist">
