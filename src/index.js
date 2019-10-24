@@ -36,12 +36,12 @@ class ToDo extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.addItem(event.target.value)
+        this.props.addItem(this.state.value)
     }
 
     render() {
         return (
-            <form>
+            <form onSubmit={this.handleSubmit}>
                 <label>Add task:</label>
                 <input type="text" value={this.state.value} onChange={this.handleChange} />
                 <input type="submit" value="Submit" />
@@ -54,7 +54,7 @@ class ToDo extends React.Component {
 class ToDoList extends React.Component {
     state = {items: []}
 
-    addItem(item) {
+    addItem = (item) => {
         let items = this.state.items.slice()
         items.push(item)
         this.setState({items: items})
